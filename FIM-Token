@@ -1,0 +1,36 @@
+contract ERC20 {
+   string public constant NAME = "FIM Token";
+   string public constant SYMBOL = "FIM";
+   uint8 public constant DECIMALS = 18;
+
+   uint256 public supply;
+   address public owner;
+   mapping (address => uint256) public balances;
+   constructor(uint256 _INITIAL_AMOUNT )  
+   {
+      supply = _INITIAL_AMOUNT;
+
+      balances[msg.sender] = _INITIAL_AMOUNT;
+
+      owner = msg.sender;
+   }
+   function balanceOf(address _owner) public view returns (uint256 balance)
+   {
+     return balances[_owner];
+   }
+
+ function totalSupply() public view returns (uint256 totalSupply)
+   {
+     return supply;
+   }
+
+   function transfer(address _to, uint256 _value) public 
+     returns (bool     success) {
+     require(balances[msg.sender] >= _value, "Sender has not enought Token");
+     balances[msg.sender] -= _value;
+
+     balances[_to] += _value;
+
+     return true;
+  }
+}
