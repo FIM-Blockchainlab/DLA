@@ -37,7 +37,7 @@ contract ERC20 {
      return true;
   }
   
-     function buy(uint _value) public {
+     function buyProduct(uint _value) public {
        balances[msg.sender] -= _value;
        balances[owner] += _value;
    }
